@@ -7,6 +7,7 @@ using Microsoft.Extensions.Hosting;
 using ConferencePlanner.GraphQL.Attendees;
 using ConferencePlanner.GraphQL.Data;
 using ConferencePlanner.GraphQL.DataLoader;
+using ConferencePlanner.GraphQL.Filtering;
 using ConferencePlanner.GraphQL.Imports;
 using ConferencePlanner.GraphQL.Sessions;
 using ConferencePlanner.GraphQL.Speakers;
@@ -54,7 +55,8 @@ namespace ConferencePlanner.GraphQL
 
                     // In this section we are adding extensions like relay helpers,
                     // filtering and sorting.
-                    .AddFiltering()
+                    //.AddFiltering()
+                    .AddFiltering<CustomFilteringConvention>()
                     .AddSorting()
                     .EnableRelaySupport()
 
