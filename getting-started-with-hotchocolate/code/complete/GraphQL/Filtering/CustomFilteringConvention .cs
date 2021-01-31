@@ -2,15 +2,11 @@
 using HotChocolate.Data;
 using HotChocolate.Data.Filters;
 using HotChocolate.Data.Filters.Expressions;
+using HotChocolate.Types;
 using HotChocolate.Types.Descriptors;
 
 namespace ConferencePlanner.GraphQL.Filtering
 {
-  public static class CustomOperations
-  {
-    public const int Like = 1025;
-  }
-
   public class CustomFilteringConvention : FilterConvention
   {
     protected override FilterConventionDefinition CreateDefinition(IConventionContext context)
@@ -28,6 +24,7 @@ namespace ConferencePlanner.GraphQL.Filtering
         .Configure<StringOperationFilterInputType>(
           x => x
             .Operation(CustomOperations.Like)
+            .Type<StringType>()
         );
 
       descriptor
@@ -38,19 +35,5 @@ namespace ConferencePlanner.GraphQL.Filtering
           x => x
             .AddFieldHandler<QueryableStringInvariantLikeHandler>()));
     }
-  }
-
-  public static class CustomerFilterConventionExtensions
-  {
-    public static IFilterConventionDescriptor AddInvariantComparison(
-      this IFilterConventionDescriptor conventionDescriptor)
-    {
-      return conventionDescriptor
-        .Configure<StringOperationFilterInputType>(x=>
-          x.Operation(CustomOperations.Like)
-            .Name("like")  
-        );
-    }
-      
   }
 }

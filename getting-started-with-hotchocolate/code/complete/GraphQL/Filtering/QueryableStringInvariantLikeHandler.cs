@@ -37,7 +37,7 @@ namespace ConferencePlanner.GraphQL.Filtering
       // e.g. ~> eq: "221B Baker Street"
       if (parsedValue is string str)
       {
-        // Creates and returnes the operation
+        // Creates and returns the operation
         // e.g. ~> y.Street.ToLower() == "221b baker street"
 
         //MethodInfo contains = typeof(string).GetMethod("Contains");
@@ -53,8 +53,7 @@ namespace ConferencePlanner.GraphQL.Filtering
           Expression.Call(property, _toLower),
           "Contains",
           Type.EmptyTypes, 
-          Expression.Constant(str.ToLower()),
-          Expression.Constant(StringComparison.InvariantCultureIgnoreCase)
+          Expression.Constant(str.ToLower())
         );
 
         //return Expression.Equal(
